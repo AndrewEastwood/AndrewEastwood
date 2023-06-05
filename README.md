@@ -21,3 +21,8 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+
+Some bookmarks:
+
+https://jarednielsen.com/big-o-log-linear-time-complexity/
