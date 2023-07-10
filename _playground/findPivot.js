@@ -16,8 +16,8 @@ const findPivot = nums => {
 }
 
 // success:
-findPivot([1,2,3,4,5,6,7,0], 0, 7)
-findPivot([2,3,4,5,6,7,0,1], 0, 7)
-findPivot([7,0,1,2,3,4,5,6], 0, 7)
-findPivot([0,1,2,3,4,5,6,7], 0, 7)
-findPivot([5,6,7,0,1,2,3,4], 0, 7)
+findPivot([1,2,3,4,5,6,7,0], 0, 7);
+findPivot([2,3,4,5,6,7,0,1], 0, 7);
+findPivot([7,0,1,2,3,4,5,6], 0, 7);
+findPivot([0,1,2,3,4,5,6,7], 0, 7);
+findPivot([5,6,7,0,1,2,3,4], 0, 7);
