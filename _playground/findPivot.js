@@ -12,7 +12,7 @@ const findPivot = nums => {
     }
     return lookup(nums, left, midIdx - 1);
   }
-  return lookup(nums, 0, nums.length);
+  return lookup(nums, 0, nums.length - 1);
 }
 
 // success:
