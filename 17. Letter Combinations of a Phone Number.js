@@ -44,7 +44,6 @@ var letterCombinations = function(digits) {
     '9': ['w', 'x', 'y', 'z']
   };
 
-  let results = [];
   let nums = digits.split('');
   let numCharsToCombinate = [];
 
