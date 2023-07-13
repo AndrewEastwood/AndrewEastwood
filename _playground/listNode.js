@@ -20,16 +20,31 @@ function ListNode(val) {
   this.delete = () => {
     // delete this
     // no prev ( we are root )
-    if (!this.prev) {
-      this.root = this.next;
+    if (this.isRoot) {
+      // last and is root
+      if (!this.next) {
+        this.root.targets[this._id]
+        this.root = null;
+        return null;
+      }
+      const delEl = this.root;
+      this.root = this.next ?? null;
+
       this.root.isRoot = true;
-    } else {
+
+    } else if (this.isTail) {
       this.prev.next = this.next;
       this.prev.isTail = this.prev
+    } else {
+
     }
-    delete this.root.targets[this._id];
-    this.root.size--;
-    return this.next;
+    // delete this.root.targets[this._id];
+    // Object.assign(this, this.next ?? {});
+    // this.isTail = !this.next;
+    // this.isRoot = !this.prev;
+    // this.next = this.next?.next ?? null;
+    // this.root.size--;
+    return this;
   }
   this.getHead = () => this.root;
 }
@@ -42,7 +57,7 @@ ListNode.create = (val) => {
 }
 
 // make some liked list
-const ln1 = ListNode.create(1).link(2).link(3).link(4).link(5).head();
+const ln1 = ListNode.create(1).link(2).link(3).link(4).link(5).getHead();
 
 
 var deleteMiddle = function(head) {
@@ -74,3 +89,5 @@ var deleteMiddle = function(head) {
   // }
   return head;
 };
+
+deleteMiddle(ln1)
