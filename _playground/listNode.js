@@ -48,6 +48,7 @@ function ListNode(val) {
   }
   this.getHead = () => this.root;
 }
+
 ListNode.create = (val) => {
   let root = new ListNode(val);
   root._id = '#0';
@@ -59,6 +60,22 @@ ListNode.create = (val) => {
 // make some liked list
 const ln1 = ListNode.create(1).link(2).link(3).link(4).link(5).getHead();
 
+const bfs = (root) => {
+  const q = [];
+  if (root) {
+    q.push(root);
+  };
+  while (q.length) {
+    const node = q.shift();
+    console.log(node.val);
+    if (node.left) {
+      q.push(node.left);
+    }
+    if (node.right) {
+      q.push(node.right);
+    }
+  }
+};
 
 var deleteMiddle = function(head) {
   const listSize = (pt, s = 1) => pt.next ? listSize(pt.next, s + 1) : s;
