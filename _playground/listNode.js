@@ -54,28 +54,22 @@ ListNode.create = (val) => {
   root._id = '#0';
   root.size = 1;
   root.targets = { [root._id]: root, };
+  
   return root;
 }
 
 // make some liked list
 const ln1 = ListNode.create(1).link(2).link(3).link(4).link(5).getHead();
 
-const bfs = (root) => {
-  const q = [];
-  if (root) {
-    q.push(root);
-  };
-  while (q.length) {
-    const node = q.shift();
-    console.log(node.val);
-    if (node.left) {
-      q.push(node.left);
-    }
-    if (node.right) {
-      q.push(node.right);
-    }
-  }
-};
+// Good to know!
+// to get the middle node
+// u have to maintain two pointers
+// the firtst interates the nodes one-by-one
+// rather then the second one goes x2 times faster
+// this means that the faster pointer will reach the
+// end of the list excatly when the first pointer
+// is pointing the middle of the list
+
 
 var deleteMiddle = function(head) {
   const listSize = (pt, s = 1) => pt.next ? listSize(pt.next, s + 1) : s;
