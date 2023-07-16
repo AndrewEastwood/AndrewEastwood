@@ -15,6 +15,8 @@ const findPivot = nums => {
   return lookup(nums, 0, nums.length - 1);
 }
 
+// works with 
+
 // success:
 findPivot([1,2,3,4,5,6,7,0], 0, 7);
 findPivot([2,3,4,5,6,7,0,1], 0, 7);
