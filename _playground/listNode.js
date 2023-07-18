@@ -1,65 +1,40 @@
 function ListNode(val) {
-  this._id;
-  this.root = this;
   this.val = (val===undefined ? 0 : val)
   this.next = null;
   this.prev = null;
-  this.isRoot = true;
-  this.isTail = true;
-  this.link = (val) => {
-    this.root.size++;
-    this.next = new ListNode(val);
-    this.next._id = "#" + (this.root.size - 1);
-    this.next.root = this.root;
-    this.next.prev = this;
-    this.next.isRoot = false;
-    this.isTail = false;
-    this.root.targets[this.next._id] = this.next;
-    return this.next;
-  }
-  this.delete = () => {
-    // delete this
-    // no prev ( we are root )
-    if (this.isRoot) {
-      // last and is root
-      if (!this.next) {
-        this.root.targets[this._id]
-        this.root = null;
-        return null;
-      }
-      const delEl = this.root;
-      this.root = this.next ?? null;
-
-      this.root.isRoot = true;
-
-    } else if (this.isTail) {
-      this.prev.next = this.next;
-      this.prev.isTail = this.prev
-    } else {
-
-    }
-    // delete this.root.targets[this._id];
-    // Object.assign(this, this.next ?? {});
-    // this.isTail = !this.next;
-    // this.isRoot = !this.prev;
-    // this.next = this.next?.next ?? null;
-    // this.root.size--;
-    return this;
-  }
-  this.getHead = () => this.root;
+  this.isRoot = false;
+  this.isTail = false;
 }
 
 ListNode.create = (val) => {
   let root = new ListNode(val);
   root._id = '#0';
-  root.size = 1;
-  root.targets = { [root._id]: root, };
-  
-  return root;
+  root.isRoot = true;
+  root.isTail = true;
+  const service = {
+    head: root,
+    tail: root,
+    size: 1,
+    add(key){
+      const newTail = new ListNode(key);
+      newTail.id = "#" + (this.size - 1);
+      newTail.isTail = true;
+      newTail.prev = this.tail;
+      this.tail.isTail = false;
+      this.tail.next = newTail;
+      this.tail = newTail;
+      this.size++;
+      return service;
+    },
+    delete(key) {
+
+    }
+  };
+  return service;
 }
 
 // make some liked list
-const ln1 = ListNode.create(1).link(2).link(3).link(4).link(5).getHead();
+const ln1 = ListNode.create(1).add(2).add(3).add(4).add(5);
 
 // Good to know!
 // to get the middle node
