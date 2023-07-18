@@ -1,5 +1,5 @@
 
-// i> 44, 2, 1,66, 8,33, 2, 1, 0, 3,22 <j
+// i> 44, 2, 1,66, 8,33, 2, 1, 0, 3,22 <j // left:0 right:10
 //                   ^
 //                 pivot
 //    22, 2, 1,66, 8,33, 2, 1, 0, 3,44 | i=0;j=11 swap; i=1;j=10;
@@ -22,7 +22,7 @@ const sortQuick = function (nums1) {
       // then swap them
       if (i <= j) {
         [ arr[i], arr[j] ] = [ arr[j], arr[i] ];
-        // continue walk to the pivot
+        // continue walk towards the pivot
         i++;
         j--;
       }
@@ -32,10 +32,14 @@ const sortQuick = function (nums1) {
   const quick = (arr, left, right) => {
     const { length } = arr;
     if (length > 1) {
+      // the first iter, the pivot index is the middle of the array
       let nextPivotIndex = partition(arr, left, right);
+      // left is 0 and we keep reducing the pivot
+      // over the left part of the array
       if (left < nextPivotIndex - 1) {
         quick(arr, left, nextPivotIndex - 1);
       }
+      // then we start the right side until
       // we have not reached the right yet
       if (nextPivotIndex + 1 < right) {
         quick(arr, nextPivotIndex + 1, right);
