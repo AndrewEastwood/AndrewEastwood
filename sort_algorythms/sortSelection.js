@@ -2,6 +2,12 @@
 // pick the next min value than is smaller of [i]th value
 // swap it
 // Best/Worst: O(N^2)
+// 3,4,5,1,8,9
+// ^ ^ | |
+// ^   ^ |
+// ^     ^ <--- swap because [j](1) is less then the [i](3)
+// 1,4,5,3,8,9
+//   ^ ^ and so on
 const sortSelection = function (nums1) {
   const { length } = nums1;
   let minIndex;
