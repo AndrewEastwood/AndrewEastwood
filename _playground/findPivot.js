@@ -15,7 +15,7 @@ const findPivot = nums => {
   return lookup(nums, 0, nums.length - 1);
 }
 
-// works with 
+// works with sorted and reversed arrays
 
 // success:
 findPivot([1,2,3,4,5,6,7,0], 0, 7);
