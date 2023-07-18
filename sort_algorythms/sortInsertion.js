@@ -20,6 +20,9 @@ const sortInsertion = function (nums1) {
     while (j > 0 && nums1[j - 1] > tmp) {
       // bring the previous bigger value
       // into the current position (shift to the right)
+      // re-write [j] elements with the [j - n]
+      // until the tmp, which is [i]th el
+      // is less the [j]th element
       nums1[j] = nums1[j - 1];
       // reduce the index
       j--;
