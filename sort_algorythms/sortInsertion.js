@@ -1,4 +1,4 @@
-// walk from the current to 0 and compare
+// walk backwards from the current [i]th to the 0 and compare
 // Best O(N) / Worst: O(N^2)
 // input: [6,3,1,5,0]
 //           ^
