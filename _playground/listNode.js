@@ -16,19 +16,75 @@ ListNode.create = (val) => {
     tail: root,
     size: 1,
     add(key){
-      const newTail = new ListNode(key);
-      newTail.id = "#" + (this.size - 1);
-      newTail.isTail = true;
-      newTail.prev = this.tail;
+      const nextNode = new ListNode(key);
+      nextNode.id = "#" + this.size;
+
+      if (!this.head) {
+        nextNode.isRoot = true;
+        nextNode.isTail = true;
+        this.head = nextNode;
+        this.tail = nextNode;
+        this.size = 1;
+        return this;
+      }
+
+      nextNode.id = "#" + this.size;
+      nextNode.isTail = true;
+      nextNode.prev = this.tail;
       this.tail.isTail = false;
-      this.tail.next = newTail;
-      this.tail = newTail;
+      this.tail.next = nextNode;
+      this.tail = nextNode;
       this.size++;
       return service;
     },
     delete(key) {
+      if (!this.head) { return this; }
 
-    }
+      // removing the head node
+      if (this.head.val === key) {
+        this.head = this.head.next;
+        if (this.head) {
+          this.head.isRoot = true;
+          this.head.isTail === !this.head.next;
+          this.head.prev = null;
+          if (this.head.isTail) {
+            this.tail = this.head;
+          }
+        } else {
+          this.tail = null;
+        }
+        this.size--;
+        return this;
+      }
+
+      if (this.tail.val === key) {
+        this.tail = this.tail.prev;
+        this.tail.next = null;
+        this.tail.isTail = true;
+        this.tail.isRoot = !this.tail.prev;
+        if (this.tail.isRoot) {
+          this.head = this.tail;
+        }
+        this.size--;
+        return this;
+      }
+
+      // delete middle node
+      let pt = this.head;
+      while (pt) {
+        pt = pt.next;
+        if (pt && pt.val === key) {
+          const prev = pt.prev;
+          const next = pt.next;
+          prev.next = next;
+          next.prev = prev;
+          this.size--;
+          break;
+        }
+      }
+
+      return this;
+    },
   };
   return service;
 }
