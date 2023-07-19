@@ -1,6 +1,6 @@
-// loop through the array
-// pick the next min value than is smaller of [i]th value
-// swap it
+// loop through the array forward
+// pick the next min value [j], which is smaller than [i]th value
+// swap them [i]<=>[j], and move the [i] to the next one
 // Best/Worst: O(N^2)
 // 3,4,5,1,8,9
 // ^ ^ | |
