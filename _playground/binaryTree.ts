@@ -4,6 +4,29 @@ function TreeNode(val, left, right) {
   this.right = (right===undefined ? null : right)
 }
 
+class BinTree {
+  private _root;
+  static create(rootValue) {
+    const tree = new BinTree();
+    tree._root = new TreeNode(rootValue);
+    return tree;
+  }
+
+  private constructor () {
+    throw 'Use the BinTree.create() function';
+  }
+
+  insert() {
+    return this;
+  }
+
+  delete() {
+    return this;
+  }
+}
+
+BinTree.create();
+
 const dummyTree = new TreeNode(0, new TreeNode(1, new TreeNode(3), new TreeNode(4)), new TreeNode(2))
 
 /*
