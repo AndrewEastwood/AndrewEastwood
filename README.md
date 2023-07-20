@@ -37,3 +37,4 @@ https://www.digitalocean.com/community/tutorials/breadth-first-search-depth-firs
 
 https://www.enjoyalgorithms.com/blog/validate-binary-search-tree
 
+https://www.digitalocean.com/community/tutorials/balanced-binary-tree-check
