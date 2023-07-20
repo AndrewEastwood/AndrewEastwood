@@ -35,3 +35,5 @@ https://dev.to/christinamcmahon/common-sorting-algorithms-in-javascript-58a7
 
 https://www.digitalocean.com/community/tutorials/breadth-first-search-depth-first-search-bfs-dfs
 
+https://www.enjoyalgorithms.com/blog/validate-binary-search-tree
+
