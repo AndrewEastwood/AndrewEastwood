@@ -20,3 +20,5 @@ var preorderTraversal = function (root) {
   }
   return walk(root);
 };
+
+preorderTraversal([1, null, 2, 3]); // [1,2,3]
