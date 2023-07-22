@@ -16,11 +16,11 @@ class BinTree {
     throw 'Use the BinTree.create() function';
   }
 
-  insert() {
+  insert(key) {
     return this;
   }
 
-  delete() {
+  delete(key) {
     return this;
   }
 }
