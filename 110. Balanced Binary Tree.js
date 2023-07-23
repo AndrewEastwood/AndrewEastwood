@@ -34,3 +34,8 @@ var isBalanced = function (root) {
 
   return result !== -1;
 };
+
+
+isBalanced([3, 9, 20, null, null, 15, 7]); // true
+isBalanced([1, 2, 2, 3, null, null, 3, 4, null, null, 4]); // false
+isBalanced([1, 2, 2, 3, 3, null, null, 4, 4]); // false
