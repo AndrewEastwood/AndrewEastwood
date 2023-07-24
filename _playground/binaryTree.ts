@@ -13,8 +13,16 @@ function TreeNode(val, left, right) {
 type TTreeNode = ReturnType<typeof TreeNode>;
 type TTreeWalkFn = (node: TreeNode) => void;
 
+const heapifyUp = (data:number[]) => {
+  
+}
+
+const heapifyDown = (data:number[]) => {
+
+}
+
 class BinTree {
-	private _root;
+	private _root:TTreeNode;
 
 	static create(rootValue) {
 		const tree = new BinTree();
@@ -37,7 +45,16 @@ class BinTree {
     walker(this._root);
   }
 
+
+
+  build(nodeValues:number[]) {
+
+  }
+
 	add(val) {
+    if (!this._root.left && !this._root.right) {
+
+    }
 		return this;
 	}
 
