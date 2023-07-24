@@ -11,7 +11,7 @@ function TreeNode(val, left, right) {
 }
 
 type TTreeNode = ReturnType<typeof TreeNode>;
-type TTreeWalkFn = (node: TreeNode) => void;
+type TTreeWalkFn = (node: TTreeNode) => void;
 
 const heapifyUp = (data: number[]) => {};
 
@@ -30,15 +30,33 @@ class BinTree {
     throw 'Use the BinTree.create() function';
   }
 
-  traverse(onPre?: TTreeWalkFn, onIn?: TTreeWalkFn, onPost?: TTreeWalkFn) {
+  traverse(hooks:{onPre?: TTreeWalkFn, onIn?: TTreeWalkFn, onPost?: TTreeWalkFn}) {
     const walker = (n: TTreeNode) => {
-      onPre(n);
+      onPre?.(n);
       walker(n.left);
-      onIn(n);
+      onIn?.(n);
       walker(n.right);
-      onPost(n);
+      onPost?.(n);
     };
     walker(this._root);
+  }
+
+  walkByPreOrder() {
+    const result = [];
+    this.traverse({ onPre:n => result.push(n.val) });
+    return result;
+  }
+
+  walkByInOrder() {
+    const result = [];
+    this.traverse({onIn: n => result.push(n.val)});
+    return result;
+  }
+
+  walkByPostOrder() {
+    const result = [];
+    this.traverse({onPost: n => result.push(n.val)});
+    return result;
   }
 
   build(nodeValues: number[]) {}
