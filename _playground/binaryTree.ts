@@ -105,6 +105,19 @@ class BinTree {
     };
     return _h(this._root);
   }
+
+  isBalancedBST() {
+    const isBalanced = (n) => {
+      if (!n) { return 0; }
+      const l = isBalanced(n.left);
+      const r = isBalanced(n.right);
+      if (l === -1 || r === -1 || Math.abs(l - r) > 1) {
+        return -1;
+      }
+      return Math.max(l, r) + 1;
+    }
+    return isBalanced(this._root);
+  }
 }
 
 // BinTree.create();
