@@ -14,7 +14,7 @@ type TTreeNode = ReturnType<typeof TreeNode>;
 type TTreeWalkFn = (node: TreeNode) => void;
 
 const heapifyUp = (data:number[]) => {
-  
+
 }
 
 const heapifyDown = (data:number[]) => {
@@ -45,25 +45,39 @@ class BinTree {
     walker(this._root);
   }
 
-
-
   build(nodeValues:number[]) {
 
   }
 
-	add(val) {
+	add(val:number) {
+    const insert = (node:TTreeNode, val:number) => {
+      if (node.val > val) {
+        node.left = new TreeNode(val);
+      } else {
+        node.right = new TreeNode(val);
+      }
+      return node;
+    }
     if (!this._root.left && !this._root.right) {
-
+      insert(this._root, val);
     }
 		return this;
 	}
 
-	delete(val) {
+	delete(val:number) {
 		return this;
 	}
+
+  getHeight() {
+    const _h = (n:TTreeNode) => {
+      if (!n) { return 0; }
+      return Math.max(_h(n.left), _h(n.right)) + 1;
+    }
+    return _h(this._root);
+  }
 }
 
-BinTree.create();
+// BinTree.create();
 
 // const dummyTree = new TreeNode(0, new TreeNode(1, new TreeNode(3), new TreeNode(4)), new TreeNode(2))
 
