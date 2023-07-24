@@ -30,8 +30,13 @@ class BinTree {
     throw 'Use the BinTree.create() function';
   }
 
-  traverse(hooks:{onPre?: TTreeWalkFn, onIn?: TTreeWalkFn, onPost?: TTreeWalkFn}) {
-    const walker = (n: TTreeNode) => {
+  traverse(hooks: {
+    onPre?: TTreeWalkFn;
+    onIn?: TTreeWalkFn;
+    onPost?: TTreeWalkFn;
+  }) {
+    const walker = (n?: TTreeNode) => {
+      if (!n) { return; }
       onPre?.(n);
       walker(n.left);
       onIn?.(n);
@@ -43,23 +48,23 @@ class BinTree {
 
   walkByPreOrder() {
     const result = [];
-    this.traverse({ onPre:n => result.push(n.val) });
+    this.traverse({ onPre: (n) => result.push(n.val) });
     return result;
   }
 
   walkByInOrder() {
     const result = [];
-    this.traverse({onIn: n => result.push(n.val)});
+    this.traverse({ onIn: (n) => result.push(n.val) });
     return result;
   }
 
   walkByPostOrder() {
     const result = [];
-    this.traverse({onPost: n => result.push(n.val)});
+    this.traverse({ onPost: (n) => result.push(n.val) });
     return result;
   }
 
-  static fromArray (nodeValues: number[]) {
+  static fromArray(nodeValues: number[]) {
     const tree = BinTree.create();
     for (let i = 0; i < nodeValues.length; i++) {
       tree.add(nodeValues[i]);
@@ -69,14 +74,19 @@ class BinTree {
 
   add(val: number) {
     const insert = (node: TTreeNode, val: number) => {
+      if (!node) {
+        return new TreeNode(val);
+      }
       if (node.val > val) {
-        node.left = new TreeNode(val);
+        node.left = insert(node.left, val);
       } else {
-        node.right = new TreeNode(val);
+        node.right = insert(node.right, val);
       }
       return node;
     };
-    if (!this._root.left && !this._root.right) {
+    if (!this._root) {
+      this._root = new TreeNode(val);
+    } else {
       insert(this._root, val);
     }
     return this;
