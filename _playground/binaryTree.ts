@@ -3,26 +3,22 @@ function TreeNode(val, left, right) {
 	this.left = left === undefined ? null : left;
 	this.right = right === undefined ? null : right;
 
-  return {
-    val: this.val,
-    left: this.left,
-    right: this.right,
-  };
+	return {
+		val: this.val,
+		left: this.left,
+		right: this.right,
+	};
 }
 
 type TTreeNode = ReturnType<typeof TreeNode>;
 type TTreeWalkFn = (node: TreeNode) => void;
 
-const heapifyUp = (data:number[]) => {
+const heapifyUp = (data: number[]) => {};
 
-}
-
-const heapifyDown = (data:number[]) => {
-
-}
+const heapifyDown = (data: number[]) => {};
 
 class BinTree {
-	private _root:TTreeNode;
+	private _root: TTreeNode;
 
 	static create(rootValue) {
 		const tree = new BinTree();
@@ -35,46 +31,46 @@ class BinTree {
 	}
 
 	traverse(onPre?: TTreeWalkFn, onIn?: TTreeWalkFn, onPost?: TTreeWalkFn) {
-    const walker = (n: TTreeNode) => {
-      onPre(n);
-      walker(n.left);
-      onIn(n);
-      walker(n.right);
-      onPost(n);
-    }
-    walker(this._root);
-  }
+		const walker = (n: TTreeNode) => {
+			onPre(n);
+			walker(n.left);
+			onIn(n);
+			walker(n.right);
+			onPost(n);
+		};
+		walker(this._root);
+	}
 
-  build(nodeValues:number[]) {
+	build(nodeValues: number[]) {}
 
-  }
-
-	add(val:number) {
-    const insert = (node:TTreeNode, val:number) => {
-      if (node.val > val) {
-        node.left = new TreeNode(val);
-      } else {
-        node.right = new TreeNode(val);
-      }
-      return node;
-    }
-    if (!this._root.left && !this._root.right) {
-      insert(this._root, val);
-    }
+	add(val: number) {
+		const insert = (node: TTreeNode, val: number) => {
+			if (node.val > val) {
+				node.left = new TreeNode(val);
+			} else {
+				node.right = new TreeNode(val);
+			}
+			return node;
+		};
+		if (!this._root.left && !this._root.right) {
+			insert(this._root, val);
+		}
 		return this;
 	}
 
-	delete(val:number) {
+	delete(val: number) {
 		return this;
 	}
 
-  getHeight() {
-    const _h = (n:TTreeNode) => {
-      if (!n) { return 0; }
-      return Math.max(_h(n.left), _h(n.right)) + 1;
-    }
-    return _h(this._root);
-  }
+	getHeight() {
+		const _h = (n: TTreeNode) => {
+			if (!n) {
+				return 0;
+			}
+			return Math.max(_h(n.left), _h(n.right)) + 1;
+		};
+		return _h(this._root);
+	}
 }
 
 // BinTree.create();
