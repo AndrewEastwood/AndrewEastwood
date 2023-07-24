@@ -110,13 +110,14 @@ class BinTree {
     const isBalanced = (n) => {
       if (!n) { return 0; }
       const l = isBalanced(n.left);
+      if (l === -1) { return -1; }
       const r = isBalanced(n.right);
-      if (l === -1 || r === -1 || Math.abs(l - r) > 1) {
+      if (r === -1 || Math.abs(l - r) > 1) {
         return -1;
       }
       return Math.max(l, r) + 1;
     }
-    return isBalanced(this._root);
+    return isBalanced(this._root) > 0;
   }
 }
 
