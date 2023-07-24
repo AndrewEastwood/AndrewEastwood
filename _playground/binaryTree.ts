@@ -59,7 +59,13 @@ class BinTree {
     return result;
   }
 
-  build(nodeValues: number[]) {}
+  static fromArray (nodeValues: number[]) {
+    const tree = BinTree.create();
+    for (let i = 0; i < nodeValues.length; i++) {
+      tree.add(nodeValues[i]);
+    }
+    return tree;
+  }
 
   add(val: number) {
     const insert = (node: TTreeNode, val: number) => {
