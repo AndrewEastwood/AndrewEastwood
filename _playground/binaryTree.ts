@@ -35,7 +35,7 @@ class BinSearchTree {
     return tree;
   }
 
-  traverse(hooks?: {
+  private traverse(hooks?: {
     onPre?: TTreeWalkFn;
     onIn?: TTreeWalkFn;
     onPost?: TTreeWalkFn;
