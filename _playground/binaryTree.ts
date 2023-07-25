@@ -20,6 +20,8 @@ const heapifyDown = (data: number[]) => {};
 class BinTree {
   private _root: TTreeNode;
 
+  private constructor() {}
+
   static empty() {
     const tree = new BinTree();
     return tree;
@@ -33,9 +35,6 @@ class BinTree {
     return tree;
   }
 
-  // private constructor() {
-  //   throw 'Use the BinTree.empty() function';
-  // }
 
   traverse(hooks?: {
     onPre?: TTreeWalkFn;
