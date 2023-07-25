@@ -95,6 +95,7 @@ class BinTree {
   }
 
   delete(val: number) {
+    // some readings: https://www.geeksforgeeks.org/deletion-in-binary-search-tree/
     const _deletor = (node?: TTreeNode) => {
       if (!node) {
         return null;
