@@ -35,7 +35,6 @@ class BinTree {
     return tree;
   }
 
-
   traverse(hooks?: {
     onPre?: TTreeWalkFn;
     onIn?: TTreeWalkFn;
