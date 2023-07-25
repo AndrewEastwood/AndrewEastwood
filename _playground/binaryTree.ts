@@ -17,18 +17,18 @@ const heapifyUp = (data: number[]) => {};
 
 const heapifyDown = (data: number[]) => {};
 
-class BinTree {
+class BinSearchTree {
   private _root: TTreeNode;
 
   private constructor() {}
 
   static empty() {
-    const tree = new BinTree();
+    const tree = new BinSearchTree();
     return tree;
   }
 
   static fromArray(nodeValues: number[]) {
-    const tree = BinTree.empty();
+    const tree = BinSearchTree.empty();
     for (let i = 0; i < nodeValues.length; i++) {
       tree.add(nodeValues[i]);
     }
@@ -230,8 +230,8 @@ class BinTree {
   }
 }
 
-console.log('BinTree Sandbox');
-const bt = BinTree.fromArray([9, 4, 7, 3, 6, 2, 1, 0, 10, 14, 11, 15, 12, 13]);
+console.log('BinSearchTree Sandbox');
+const bt = BinSearchTree.fromArray([9, 4, 7, 3, 6, 2, 1, 0, 10, 14, 11, 15, 12, 13]);
 
 // use https://visualgo.net/en/bst
 
