@@ -61,6 +61,7 @@ class BinTree {
     return result;
   }
 
+  // always sorted way
   walkByInOrder() {
     const result = [];
     this.traverse({ onIn: (n) => result.push(n.val) });
@@ -72,7 +73,6 @@ class BinTree {
     this.traverse({ onPost: (n) => result.push(n.val) });
     return result;
   }
-
 
   add(val: number) {
     const _insertor = (node?: TTreeNode) => {
