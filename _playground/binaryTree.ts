@@ -168,7 +168,7 @@ class BinTree {
         leaf = leaf.left;
       }
 
-      // Delete leaf. Since leaf
+      // Delete the leaf. Since the leaf
       // is always left child of its parent
       // we can safely make leaf's right
       // right child as left of its parent.
@@ -234,7 +234,15 @@ class BinTree {
 console.log('BinTree Sandbox');
 const bt = BinTree.fromArray([9, 4, 7, 3, 6, 2, 1, 0, 10, 14, 11, 15, 12, 13]);
 
-console.log('walkByInOrder', bt.walkByInOrder());
+// use https://visualgo.net/en/bst
+
+bt.delete(4);
+console.log('walkByInOrder', bt.walkByInOrder(), bt);
+
+bt.delete(14);
+console.log('walkByInOrder', bt.walkByInOrder(), bt);
+
+
 
 // const dummyTree = new TreeNode(0, new TreeNode(1, new TreeNode(3), new TreeNode(4)), new TreeNode(2))
 
