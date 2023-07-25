@@ -38,3 +38,4 @@ Binary Trees:
 - https://www.enjoyalgorithms.com/blog/validate-binary-search-tree
 - https://www.digitalocean.com/community/tutorials/balanced-binary-tree-check
 - https://visualgo.net/en/bst
+- https://www.baeldung.com/cs/heap-vs-binary-search-tree

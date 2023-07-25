@@ -36,7 +36,9 @@ class BinTree {
     onPost?: TTreeWalkFn;
   }) {
     const walker = (n?: TTreeNode) => {
-      if (!n) { return; }
+      if (!n) {
+        return;
+      }
       onPre?.(n);
       walker(n.left);
       onIn?.(n);
@@ -73,26 +75,130 @@ class BinTree {
   }
 
   add(val: number) {
-    const insert = (node: TTreeNode, val: number) => {
+    const _insertor = (node?: TTreeNode) => {
       if (!node) {
         return new TreeNode(val);
       }
       if (node.val > val) {
-        node.left = insert(node.left, val);
+        node.left = _insertor(node.left, val);
       } else {
-        node.right = insert(node.right, val);
+        node.right = _insertor(node.right, val);
       }
       return node;
     };
     if (!this._root) {
       this._root = new TreeNode(val);
     } else {
-      insert(this._root, val);
+      _insertor(this._root, val);
     }
     return this;
   }
 
   delete(val: number) {
+    const _deletor = (node?: TTreeNode) => {
+      if (!node) {
+        return null;
+      }
+
+      if (val < node.val) {
+        node.left = _deletor(node.left);
+        return node;
+      }
+
+      if (val > node.val) {
+        node.right = _deletor(node.right);
+        return node;
+      }
+
+      // delete goes here
+      // since the node is the exact one
+
+      // the leaf node with no branches
+      if (!node.left && !node.right) {
+        // the deleted node has no branches
+        node = null;
+        return null;
+      }
+
+      // the case when the node has no the left branch
+      // but does have the right one
+      //     \
+      //     [4]  <---deleting node
+      //    x   \
+      //        [next]
+      if (!node.left) {
+        // then we have to
+        // backup the next path (which is the right branch)
+        const nextConnection = node.right;
+        // delete the current node
+        node = null;
+        // and return the next node
+        return nextConnection;
+      }
+
+      // the same as the previous, but
+      // for the left node
+      //     \
+      //     [4]  <---deleting node
+      //    /   x
+      // [next]
+      if (!node.right) {
+        const nextConnection = node.left;
+        node = null;
+        return nextConnection;
+      }
+
+      // uhh, the case, when the node
+      // has both, right and left sub-trees
+      //     \
+      //     [4]  <---deleting node (the leaf parent)
+      //    /   \
+      //  [L]   [R]  <--- the leaf (no child nodes)
+      //
+      // ... so, we go to the R and will try to find
+      // the raplacement for the node [4]
+      // since the [4] must be raplaced with the value
+      // which is greater than [L] and less than [R]
+      let leafParent = node;
+      // we go right first
+      let leaf = node.right;
+      // and then we keep left all the way down
+      while (leaf.left) {
+        leafParent = leaf;
+        leaf = leaf.left;
+      }
+
+      // Delete leaf. Since leaf
+      // is always left child of its parent
+      // we can safely make leaf's right
+      // right child as left of its parent.
+      // If there is no succ, then assign
+      // succ->right to succParent->right
+      if (leafParent === node) {
+        //     \
+        //     [4]  <--- deleting node (same is the leaf parent)
+        //    /   \
+        //  [L]   [R]  <--- the leaf (no child nodes)
+        leafParent.right = null;
+      } else {
+        //     \
+        //     [4]  <---deleting node 
+        //    /   \
+        //  [L]   [R]  <--- (the leaf parent)
+        //        / \
+        //      [x] [y]
+        //       ^------- the leaf (no child nodes)
+        leafParent.left = null;
+      }
+
+      // take the leaf value and
+      // set it to the node
+      node.val = leafParent.val;
+      // and safely drop the leaf
+      leaf = null;
+      return node;
+    };
+    _deletor(val);
     return this;
   }
 
@@ -106,18 +212,22 @@ class BinTree {
     return _h(this._root);
   }
 
-  isBalancedBST() {
-    const isBalanced = (n) => {
-      if (!n) { return 0; }
-      const l = isBalanced(n.left);
-      if (l === -1) { return -1; }
-      const r = isBalanced(n.right);
+  isBalanced() {
+    const _isBalanced = (n) => {
+      if (!n) {
+        return 0;
+      }
+      const l = _isBalanced(n.left);
+      if (l === -1) {
+        return -1;
+      }
+      const r = _isBalanced(n.right);
       if (r === -1 || Math.abs(l - r) > 1) {
         return -1;
       }
       return Math.max(l, r) + 1;
-    }
-    return isBalanced(this._root) > 0;
+    };
+    return _isBalanced(this._root) > 0;
   }
 }
 
