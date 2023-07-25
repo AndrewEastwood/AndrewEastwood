@@ -20,17 +20,24 @@ const heapifyDown = (data: number[]) => {};
 class BinTree {
   private _root: TTreeNode;
 
-  static create(rootValue) {
+  static empty() {
     const tree = new BinTree();
-    tree._root = new TreeNode(rootValue);
     return tree;
   }
 
-  private constructor() {
-    throw 'Use the BinTree.create() function';
+  static fromArray(nodeValues: number[]) {
+    const tree = BinTree.empty();
+    for (let i = 0; i < nodeValues.length; i++) {
+      tree.add(nodeValues[i]);
+    }
+    return tree;
   }
 
-  traverse(hooks: {
+  // private constructor() {
+  //   throw 'Use the BinTree.empty() function';
+  // }
+
+  traverse(hooks?: {
     onPre?: TTreeWalkFn;
     onIn?: TTreeWalkFn;
     onPost?: TTreeWalkFn;
@@ -39,11 +46,11 @@ class BinTree {
       if (!n) {
         return;
       }
-      onPre?.(n);
+      hooks?.onPre?.(n);
       walker(n.left);
-      onIn?.(n);
+      hooks?.onIn?.(n);
       walker(n.right);
-      onPost?.(n);
+      hooks?.onPost?.(n);
     };
     walker(this._root);
   }
@@ -66,13 +73,6 @@ class BinTree {
     return result;
   }
 
-  static fromArray(nodeValues: number[]) {
-    const tree = BinTree.create();
-    for (let i = 0; i < nodeValues.length; i++) {
-      tree.add(nodeValues[i]);
-    }
-    return tree;
-  }
 
   add(val: number) {
     const _insertor = (node?: TTreeNode) => {
@@ -182,7 +182,7 @@ class BinTree {
         leafParent.right = null;
       } else {
         //     \
-        //     [4]  <---deleting node 
+        //     [4]  <---deleting node
         //    /   \
         //  [L]   [R]  <--- (the leaf parent)
         //        / \
@@ -193,7 +193,7 @@ class BinTree {
 
       // take the leaf value and
       // set it to the node
-      node.val = leafParent.val;
+      node.val = leaf.val;
       // and safely drop the leaf
       leaf = null;
       return node;
@@ -231,7 +231,10 @@ class BinTree {
   }
 }
 
-// BinTree.create();
+console.log('BinTree Sandbox');
+const bt = BinTree.fromArray([9, 4, 7, 3, 6, 2, 1, 0, 10, 14, 11, 15, 12, 13]);
+
+console.log('walkByInOrder', bt.walkByInOrder());
 
 // const dummyTree = new TreeNode(0, new TreeNode(1, new TreeNode(3), new TreeNode(4)), new TreeNode(2))
 
