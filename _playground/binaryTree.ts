@@ -13,9 +13,15 @@ function TreeNode(val, left, right) {
 type TTreeNode = ReturnType<typeof TreeNode>;
 type TTreeWalkFn = (node: TTreeNode) => void;
 
-const heapifyUp = (data: number[]) => {};
+// [1,2,3,4,5]
+// 
+const heapifyUp = (data: number[]) => {
+  const left = 2 * n
+};
 
-const heapifyDown = (data: number[]) => {};
+const heapifyDown = (data: number[]) => {
+
+};
 
 class BinSearchTree {
   private _root: TTreeNode;
