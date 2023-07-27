@@ -13,10 +13,17 @@ function TreeNode(val, left, right) {
 type TTreeNode = ReturnType<typeof TreeNode>;
 type TTreeWalkFn = (node: TTreeNode) => void;
 
-// [1,2,3,4,5]
-// 
+// v[3,2,5,4,1]
+// # 0 1 2 3 4
+//
+//       [#0](3)
+//      /    \
+//   [#1](2) [#2](5)
+//  /   \
+//[#3](4)  [#4](1)
+
 const heapifyUp = (data: number[]) => {
-  const left = 2 * n
+
 };
 
 const heapifyDown = (data: number[]) => {
