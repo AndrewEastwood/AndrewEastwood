@@ -23,7 +23,39 @@ type TTreeWalkFn = (node: TTreeNode) => void;
 //[#3](4)  [#4](1)
 
 const heapifyUp = (data: number[]) => {
-
+  // the largest el is on top
+  let { length:n } = data;
+  for (let i = 0; i < n; i++) {
+    // loop back through parent nodes
+    let childNodeIndex = i;
+    let parentNodeIdx = Math.ceil(childNodeIndex / 2) - 1;
+    // [2,|3,4|,5,1,6,7|,8,9,0,10,null,null|]
+    //  ^  ^    ^ ^      ^ ^
+    //     2     3        5 ... <= parent nodes
+    // the [i]th index goes till the end of the data
+    // means that we passed previous nodes.
+    // to resolve previous parent nodes
+    // we use the following fn: (i / 2) and round up (ceil) and - 1
+    // therefore: the value 3 is at #1 and the value 4 is at #2
+    // the parent node, which is 2 is at #0
+    // so: (#1 / 2) => 0.5 => ceil => 1 - 1 => 0
+    // and (#2 / 2) => 1 => ceil => 1 - 1 => 0
+    // this is why we use ceil and -1, to get the exact prent index
+    // The rest is just easy comparation and swap
+    while (childNodeIndex > 0 && data[parentNodeIdx] < data[childNodeIndex]) {
+      // swap; move child to the upper level
+      [
+        data[parentNodeIdx],
+        data[childNodeIndex]
+      ] = [
+        data[childNodeIndex],
+        data[parentNodeIdx]
+      ];
+      childNodeIndex = parentNodeIdx;
+      parentNodeIdx = Math.ceil(childNodeIndex / 2) - 1;
+    }
+  }
+  return data;
 };
 
 const heapifyDown = (data: number[]) => {
