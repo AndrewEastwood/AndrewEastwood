@@ -66,8 +66,11 @@ const sortHeapify = (data: number[]) => {
   const { length:n } = data;
   while (n > 0) {
     n--;
-    const top = heapifyUp(data, n).shift();
-    data.push(top);
+    heapifyUp(data, n);
+    // swap last with the first
+    // the first one is the largest el
+    if (n === 0) { break; }
+    [ data[length - 1], data[0] ] = [ data[0], data[length - 1] ];
   }
   return data;
 };
