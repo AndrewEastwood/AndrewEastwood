@@ -22,10 +22,10 @@ type TTreeWalkFn = (node: TTreeNode) => void;
 //  /   \
 //[#3](4)  [#4](1)
 
-const heapifyUp = (data: number[]) => {
+const heapifyUp = (data: number[], sizeLimit?: number) => {
   // the largest el is on top
   let { length:n } = data;
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < (sizeLimit ?? n); i++) {
     // loop back through parent nodes
     let childNodeIndex = i;
     let parentNodeIdx = Math.ceil(childNodeIndex / 2) - 1;
@@ -60,6 +60,16 @@ const heapifyUp = (data: number[]) => {
 
 const heapifyDown = (data: number[]) => {
 
+};
+
+const sortHeapify = (data: number[]) => {
+  const { length:n } = data;
+  while (n > 0) {
+    n--;
+    const top = heapifyUp(data, n).shift();
+    data.push(top);
+  }
+  return data;
 };
 
 class BinSearchTree {
