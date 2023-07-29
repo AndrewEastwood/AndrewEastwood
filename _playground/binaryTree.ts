@@ -22,13 +22,15 @@ type TTreeWalkFn = (node: TTreeNode) => void;
 //  /   \
 //[#3](4)  [#4](1)
 
-const heapMax = (data: number[], sizeLimit?: number) => {
+
+// the root nodes always larger than itrs child nodes
+const heapMax = (data: number[], offset = 0) => {
   // the largest el is on top
   let { length:n } = data;
-  for (let i = 0; i < (sizeLimit ?? n); i++) {
+  for (let i = offset; i < n; i++) {
     // loop back through parent nodes
-    let childNodeIndex = i;
-    let parentNodeIdx = Math.ceil(childNodeIndex / 2) - 1;
+    let childNodeIndex = i + offset;
+    let parentNodeIdx = Math.ceil(childNodeIndex / 2) - 1 + offset;
     // [2,|3,4|,5,1,6,7|,8,9,0,10,null,null|]
     //  ^  ^    ^ ^      ^ ^
     //     2     3        5 ... <= parent nodes
@@ -42,7 +44,7 @@ const heapMax = (data: number[], sizeLimit?: number) => {
     // and (#2 / 2) => 1 => ceil => 1 - 1 => 0
     // this is why we use ceil and -1, to get the exact prent index
     // The rest is just easy comparation and swap
-    while (childNodeIndex > 0 && data[parentNodeIdx] < data[childNodeIndex]) {
+    while (childNodeIndex > offset && data[parentNodeIdx] < data[childNodeIndex]) {
       // swap; move child to the upper level
       [
         data[parentNodeIdx],
@@ -59,19 +61,20 @@ const heapMax = (data: number[], sizeLimit?: number) => {
 };
 
 // the root nodes alway smaller than its child nodes
+//
 const heapMin = (data: number[]) => {
-
+  // the root node is (index/2) - 1
+  // the L node is: (index*2) - 1
+  // the R node is: (index*2) - 2
+  const { length:n } = data;
+  const 
 };
 
 const sortHeapify = (data: number[], asc = false) => {
   const { length:n } = data;
-  while (n > 0) {
-    n--;
-    heapMax(data, n);
-    // swap last with the first
-    // the first one is the largest el
-    if (n === 0) { break; }
-    [ data[length - 1], data[0] ] = [ data[0], data[length - 1] ];
+  let offset = 0;
+  while (offset < n) {
+    heapMax(data, offset ++);
   }
   return data;
 };
