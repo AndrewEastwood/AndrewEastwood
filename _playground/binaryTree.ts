@@ -22,7 +22,7 @@ type TTreeWalkFn = (node: TTreeNode) => void;
 //  /   \
 //[#3](4)  [#4](1)
 
-const heapifyUp = (data: number[], sizeLimit?: number) => {
+const heapMax = (data: number[], sizeLimit?: number) => {
   // the largest el is on top
   let { length:n } = data;
   for (let i = 0; i < (sizeLimit ?? n); i++) {
@@ -58,15 +58,16 @@ const heapifyUp = (data: number[], sizeLimit?: number) => {
   return data;
 };
 
-const heapifyDown = (data: number[]) => {
+// the root nodes alway smaller than its child nodes
+const heapMin = (data: number[]) => {
 
 };
 
-const sortHeapify = (data: number[]) => {
+const sortHeapify = (data: number[], asc = false) => {
   const { length:n } = data;
   while (n > 0) {
     n--;
-    heapifyUp(data, n);
+    heapMax(data, n);
     // swap last with the first
     // the first one is the largest el
     if (n === 0) { break; }
