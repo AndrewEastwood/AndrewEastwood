@@ -31,7 +31,7 @@ const heapifyUp = (
 ) => {
   // the largest el is on top
   const { length: n } = data;
-  const _comparator = compareFn ?? ((curr, next) => curr > next);
+  const _comparator = compareFn ?? ((curr, next) => curr < next);
   for (let i = offset; i < n; i++) {
     // loop back through parent nodes
     let childNodeIndex = i + offset;
@@ -51,7 +51,7 @@ const heapifyUp = (
     // The rest is just easy comparation and swap
     while (
       childNodeIndex > offset &&
-      _comparator(data[parentNodeIdx], data[childNodeIndex])
+      _comparator(data[childNodeIndex], data[parentNodeIdx])
     ) {
       // swap; move child to the upper level
       [data[parentNodeIdx], data[childNodeIndex]] = [
@@ -79,7 +79,7 @@ const sortHeapify = (data: number[], asc = false) => {
   const { length: n } = data;
   let offset = 0;
   while (offset < n) {
-    heapifyUp(data, (a, b) => (asc ? a > b : a < b), offset++);
+    heapifyUp(data, (a, b) => (asc ? a < b : a > b), offset++);
   }
   return data;
 };
