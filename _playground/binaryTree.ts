@@ -24,7 +24,7 @@ type TTreeWalkFn = (node: TTreeNode) => void;
 
 // the root nodes always larger than itrs child nodes
 type THeapifyCompareFn = (a: number, b: number) => boolean;
-const heapifyUp = (
+const heapifyLoopForward = (
   data: number[],
   compareFn?: THeapifyCompareFn,
   offset = 0
@@ -67,16 +67,18 @@ const heapifyUp = (
 
 // the root nodes alway smaller than its child nodes
 //
-const heapifyDown = (data: number[],
+const heapifyLoopBack = (
+  data: number[],
   compareFn?: THeapifyCompareFn,
-  offset = 0) => {
+  offset = 0
+) => {
   // the root node is (index/2) - 1
   // the L node is: (index*2) + 1
   // the R node is: (index*2) + 2
   const { length } = data;
   const n = length - offset;
   const lastIndexOfTheSecondLast = Math.floor(n / 2) - 1;
-  const getLChildIdx = i => 2 * i + 1;
+  const getLChildIdx = (i) => 2 * i + 1;
   const _comparator = compareFn ?? ((curr, next) => curr < next);
 
   for (let i = lastIndexOfTheSecondLast; i >= 0; i--) {
@@ -90,15 +92,15 @@ const heapifyDown = (data: number[],
       if (lIdx < n && _comparator(data[lIdx], data[currIdx])) {
         swapIdx = lIdx;
       }
-      
+
       if (
         lIdx < n &&
         ((swapIdx === null && _comparator(data[rIdx], data[currIdx])) ||
           (swapIdx !== null && _comparator(data[rIdx], data[lIdx])))
       ) {
         swapIdx = rIdx;
-      } 
-      
+      }
+
       if (swapIdx === null) {
         break;
       } else {
@@ -107,21 +109,34 @@ const heapifyDown = (data: number[],
       }
     }
   }
-
 };
 
 const sortHeapify = (data: number[], asc = false, useDownAlgo = true) => {
+  const tmStart = performance.now();
   const { length: n } = data;
   let offset = 0;
   while (offset < n) {
     useDownAlgo
-      ? heapifyDown(data, (a, b) => (asc ? a < b : a > b), offset++)
-      : heapifyUp(data, (a, b) => (asc ? a < b : a > b), offset++);
+      ? heapifyLoopBack(data, (a, b) => (asc ? a < b : a > b), offset++)
+      : heapifyLoopForward(data, (a, b) => (asc ? a < b : a > b), offset++);
   }
+  console.log(` (took ${performance.now() - tmStart}ms.)`);
   return data;
 };
 
-sortHeapify([2, 1, 4, 5, 3]);
+const bigTestData = new Array(2 ** 30)
+  .fill(0)
+  .map((v) => Math.ceil(Math.random() * 2 ** 5));
+/* console.log(bigData); */
+document.write('heapifyUp: ' + heapifyLoopForward([8, 2, 1, 4, 5, 3]));
+document.write('<br><br>');
+document.write('heapifyDown: ' + heapifyLoopBack([8, 2, 1, 4, 5, 3]));
+document.write('<br><br>');
+document.write('sortHeapify as down:' + sortHeapify(bigData));
+document.write('<br><br>');
+document.write('sortHeapify as up:' + sortHeapify(bigData, false, false));
+
+sortHeapify([8, 2, 1, 4, 5, 3]); // 
 
 sortHeapify([
   41,
