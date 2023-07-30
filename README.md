@@ -33,9 +33,15 @@ https://www.cuemath.com/data/combinations/
 
 https://dev.to/christinamcmahon/common-sorting-algorithms-in-javascript-58a7
 
+
+Heap
+- https://dev.to/dsasse07/what-the-heap-utilizing-a-priority-queue-25j9#the-structure (heap)
+
+
 Binary Trees:
 - https://www.digitalocean.com/community/tutorials/breadth-first-search-depth-first-search-bfs-dfs
 - https://www.enjoyalgorithms.com/blog/validate-binary-search-tree
 - https://www.digitalocean.com/community/tutorials/balanced-binary-tree-check
 - https://visualgo.net/en/bst
 - https://www.baeldung.com/cs/heap-vs-binary-search-tree
+
