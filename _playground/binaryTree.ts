@@ -65,8 +65,9 @@ const heapifyLoopForward = (
   return data;
 };
 
-// the root nodes alway smaller than its child nodes
-//
+// the same as heapifyLoopForward but we traverse
+// the tree from the last element of the last but one layer
+// of the tree to the root tree element
 const heapifyLoopBack = (
   data: number[],
   compareFn?: THeapifyCompareFn,
