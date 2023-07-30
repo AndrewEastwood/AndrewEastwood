@@ -124,7 +124,7 @@ const sortHeapify = (data: number[], asc = false, useDownAlgo = true) => {
   return data;
 };
 
-const bigTestData = new Array(2 ** 30)
+const bigTestData = new Array(2 ** 10)
   .fill(0)
   .map((v) => Math.ceil(Math.random() * 2 ** 5));
 /* console.log(bigData); */
