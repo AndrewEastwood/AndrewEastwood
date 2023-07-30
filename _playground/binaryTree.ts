@@ -116,10 +116,14 @@ const sortHeapify = (data: number[], asc = false, useDownAlgo = true) => {
   const tmStart = performance.now();
   const { length: n } = data;
   let offset = 0;
+  const result = [];
   while (offset < n) {
     useDownAlgo
-      ? heapifyLoopBack(data, (a, b) => (asc ? a < b : a > b), offset++)
-      : heapifyLoopForward(data, (a, b) => (asc ? a < b : a > b), offset++);
+      ? heapifyLoopBack(data, (a, b) => (asc ? a < b : a > b))
+      : heapifyLoopForward(data, (a, b) => (asc ? a < b : a > b));
+    
+    offset++;
+    result.push(data.shift());
   }
   console.log(` (took ${performance.now() - tmStart}ms.)`);
   return data;
