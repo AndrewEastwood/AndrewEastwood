@@ -67,13 +67,17 @@ const heapifyUp = (
 
 // the root nodes alway smaller than its child nodes
 //
-const heapifyDown = (data: number[]) => {
+const heapifyDown = (data: number[],
+  compareFn?: THeapifyCompareFn,
+  offset = 0) => {
   // the root node is (index/2) - 1
   // the L node is: (index*2) + 1
   // the R node is: (index*2) + 2
-  const { length: n } = data;
+  const { length } = data;
+  const n = length - offset;
   const lastIndexOfTheSecondLast = Math.floor(n / 2) - 1;
   const getLChildIdx = i => 2 * i + 1;
+  const _comparator = compareFn ?? ((curr, next) => curr < next);
 
   for (let i = lastIndexOfTheSecondLast; i >= 0; i--) {
     let currIdx = i;
@@ -83,14 +87,14 @@ const heapifyDown = (data: number[]) => {
       let rIdx = getLChildIdx(currIdx) + 1;
       let swapIdx = null;
 
-      if (lIdx < n && data[currIdx] > data[lIdx]) {
+      if (lIdx < n && _comparator(data[lIdx], data[currIdx])) {
         swapIdx = lIdx;
       }
       
       if (
         lIdx < n &&
-        ((swapIdx === null && data[currIdx] > data[lIdx]) ||
-          (swapIdx !== null && data[rIdx] > data[lIdx]))
+        ((swapIdx === null && _comparator(data[rIdx], data[currIdx])) ||
+          (swapIdx !== null && _comparator(data[rIdx], data[lIdx])))
       ) {
         swapIdx = rIdx;
       } 
@@ -106,11 +110,13 @@ const heapifyDown = (data: number[]) => {
 
 };
 
-const sortHeapify = (data: number[], asc = false) => {
+const sortHeapify = (data: number[], asc = false, useDownAlgo = true) => {
   const { length: n } = data;
   let offset = 0;
   while (offset < n) {
-    heapifyUp(data, (a, b) => (asc ? a < b : a > b), offset++);
+    useDownAlgo
+      ? heapifyDown(data, (a, b) => (asc ? a < b : a > b), offset++)
+      : heapifyUp(data, (a, b) => (asc ? a < b : a > b), offset++);
   }
   return data;
 };
