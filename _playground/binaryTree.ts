@@ -69,10 +69,41 @@ const heapifyUp = (
 //
 const heapifyDown = (data: number[]) => {
   // the root node is (index/2) - 1
-  // the L node is: (index*2) - 1
-  // the R node is: (index*2) - 2
+  // the L node is: (index*2) + 1
+  // the R node is: (index*2) + 2
   const { length: n } = data;
-  //const
+  const lastIndexOfTheSecondLast = Math.floor(n / 2) - 1;
+  const getLChildIdx = i => 2 * i + 1;
+
+  for (let i = lastIndexOfTheSecondLast; i >= 0; i--) {
+    let currIdx = i;
+
+    while (true) {
+      let lIdx = getLChildIdx(currIdx);
+      let rIdx = getLChildIdx(currIdx) + 1;
+      let swapIdx = null;
+
+      if (lIdx < n && data[currIdx] > data[lIdx]) {
+        swapIdx = lIdx;
+      }
+      
+      if (
+        lIdx < n &&
+        ((swapIdx === null && data[currIdx] > data[lIdx]) ||
+          (swapIdx !== null && data[rIdx] > data[lIdx]))
+      ) {
+        swapIdx = rIdx;
+      } 
+      
+      if (swapIdx === null) {
+        break;
+      } else {
+        [data[swapIdx], data[currIdx]] = [data[currIdx], data[swapIdx]];
+        currIdx = swapIdx;
+      }
+    }
+  }
+
 };
 
 const sortHeapify = (data: number[], asc = false) => {
@@ -83,6 +114,26 @@ const sortHeapify = (data: number[], asc = false) => {
   }
   return data;
 };
+
+sortHeapify([2, 1, 4, 5, 3]);
+
+sortHeapify([
+  41,
+  20,
+  65,
+  11,
+  29,
+  50,
+  91,
+  null,
+  null,
+  null,
+  32,
+  null,
+  null,
+  72,
+  99,
+]);
 
 class BinSearchTree {
   private _root: TTreeNode;
