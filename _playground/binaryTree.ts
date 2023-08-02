@@ -78,11 +78,11 @@ const heapifyLoopBack = (
   // the R node is: (index*2) + 2
   const { length } = data;
   const n = length - offset;
-  const lastIndexOfTheSecondLast = Math.floor(n / 2) - 1;
-  const getLChildIdx = (i) => 2 * i + 1;
+  const lastIndexOfTheSecondLast = offset + Math.floor(n / 2) - 1;
+  const getLChildIdx = (idx) => 2 * idx + 1;
   const _comparator = compareFn ?? ((curr, next) => curr < next);
 
-  for (let i = lastIndexOfTheSecondLast; i >= 0; i--) {
+  for (let i = lastIndexOfTheSecondLast; i >= offset; i--) {
     let currIdx = i;
 
     while (true) {
