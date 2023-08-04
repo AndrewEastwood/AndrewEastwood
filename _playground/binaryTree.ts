@@ -76,6 +76,7 @@ const heapifyLoopBack = (
   // the root node is (index/2) - 1
   // the L node is: (index*2) + 1
   // the R node is: (index*2) + 2
+  // the offset shout chnage the top of the heap
   const { length } = data;
   const n = length - offset;
   const lastIndexOfTheSecondLast = offset + Math.floor(n / 2) - 1;
