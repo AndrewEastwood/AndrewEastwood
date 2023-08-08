@@ -142,7 +142,7 @@ document.write('sortHeapify as down:' + sortHeapify(bigData));
 document.write('<br><br>');
 document.write('sortHeapify as up:' + sortHeapify(bigData, false, false));
 
-sortHeapify([8, 2, 1, 4, 5, 3]); // 
+sortHeapify([8, 2, 1, 4, 5, 3]);
 
 sortHeapify([
   41,
