@@ -451,3 +451,27 @@ const walkerBFS = (node) => {
 };
 walkerBFS(dummyTree);
 // 0, 1, 2, 3, 4
+
+
+// it flattens the tree nodes
+const flattenTree = (node, values = [], nodeIndex = 0) => {
+  if (!node) { return values; }
+  values[nodeIndex] = node.val;
+  // left node
+  flattenTree(node?.left, values, nodeIndex * 2 + 1);
+  // right node
+  flattenTree(node?.right, values, nodeIndex * 2 + 2);
+  return values
+}
+
+// it groups by level
+const groupByLevelsTree = (node, values = [], level = 0) => {
+  if (!node) { return values; }
+  values[level] = values[level] || [];
+  values[level].push(node.val);
+  // left node
+  groupByLevelsTree(node?.left, values, level + 1);
+  // right node
+  groupByLevelsTree(node?.right, values, level + 1);
+  return values
+}
