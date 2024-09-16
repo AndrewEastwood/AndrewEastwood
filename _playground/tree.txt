@@ -20,3 +20,73 @@ Elements at Level / StartEnd Flat Array Index
 3: 4  [3,  6 ]
 4: 8  [7,  14]
 5: 16 [15, 30]
+
+
+Left adds  +1
+Right adds +2
+
+                     +1          +2
+                Left (x)   Right {y}
+|0|    2              1           2
+
+(1)*   2              3           4
+{2}*   2              5           6
+
+(3)*   2              7           8
+{4}*   2              9           10
+(5)*   2              11          12
+{6}*   2              13          14
+
+
+// regular bin-tree walk linear
+let runtimeQueue = [];
+let values = [];
+
+// init
+root ? runtimeQueue.push(root) : void 0;
+
+while (runtimeQueue.length) {
+  const currNode = runtimeQueue.pop();
+  values.push(currNode.val);
+  currNode.left ? runtimeQueue.push(currNode.left) : void 0;
+  currNode.right ? runtimeQueue.push(currNode.right) : void 0;
+}
+
+
+
+
+// the same as above, but we traverse the bin-tree in zig-zag way
+let queue = [];
+let rightToLeftRead = true;
+let levelNodesQueue = [];
+let levelValues = [];
+let result = [];
+
+root ? queue.push(root) : void 0;
+
+while (queue.length) {
+
+  // transfer grabbed nodes from the previous level
+  levelNodesQueue = [...queue];
+  // cleanup main queue for the next level nodes
+  queue = [];
+  levelValues = [];
+
+  while (levelNodesQueue.length) {
+    const currNode = level.pop();
+    levelValues.push(currNode.val);
+
+    if (rightToLeftRead) {
+      currNode.right && queue.push(currNode.right)
+      currNode.left && queue.push(currNode.left);
+    } else {
+      currNode.left && queue.push(currNode.left);
+      currNode.right && queue.push(currNode.right);
+    }
+  }
+  rightToLeftRead = !rightToLeftRead;
+  result.push(levelValues);
+}
+
+
+
